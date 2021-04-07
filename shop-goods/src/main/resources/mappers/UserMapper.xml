@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.shop.mapper.GoodsinfoMapper" >
-  <resultMap id="BaseResultMap" type="com.shop.model.Goodsinfo" >
+<mapper namespace="com.shop.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.shop.model.User" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="goodsName" property="goodsname" jdbcType="VARCHAR" />
-    <result column="price" property="price" jdbcType="REAL" />
-    <result column="picture" property="picture" jdbcType="VARCHAR" />
-    <result column="des" property="des" jdbcType="VARCHAR" />
-    <result column="producter" property="producter" jdbcType="VARCHAR" />
-    <result column="editDate" property="editdate" jdbcType="TIMESTAMP" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -69,15 +69,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, goodsName, price, picture, des, producter, editDate
+    id, name, username, password, description, telephone, sex
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shop.model.GoodsinfoExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shop.model.UserExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from goodsinfo
+    from user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -88,105 +88,105 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from goodsinfo
+    from user
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from goodsinfo
+    delete from user
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.shop.model.GoodsinfoExample" >
-    delete from goodsinfo
+  <delete id="deleteByExample" parameterType="com.shop.model.UserExample" >
+    delete from user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.shop.model.Goodsinfo" >
-    insert into goodsinfo (id, goodsName, price, 
-      picture, des, producter, 
-      editDate)
-    values (#{id,jdbcType=INTEGER}, #{goodsname,jdbcType=VARCHAR}, #{price,jdbcType=REAL}, 
-      #{picture,jdbcType=VARCHAR}, #{des,jdbcType=VARCHAR}, #{producter,jdbcType=VARCHAR}, 
-      #{editdate,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="com.shop.model.User" >
+    insert into user (id, name, username, 
+      password, description, telephone, 
+      sex)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.shop.model.Goodsinfo" >
-    insert into goodsinfo
+  <insert id="insertSelective" parameterType="com.shop.model.User" >
+    insert into user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="goodsname != null" >
-        goodsName,
+      <if test="name != null" >
+        name,
       </if>
-      <if test="price != null" >
-        price,
+      <if test="username != null" >
+        username,
       </if>
-      <if test="picture != null" >
-        picture,
+      <if test="password != null" >
+        password,
       </if>
-      <if test="des != null" >
-        des,
+      <if test="description != null" >
+        description,
       </if>
-      <if test="producter != null" >
-        producter,
+      <if test="telephone != null" >
+        telephone,
       </if>
-      <if test="editdate != null" >
-        editDate,
+      <if test="sex != null" >
+        sex,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="goodsname != null" >
-        #{goodsname,jdbcType=VARCHAR},
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
       </if>
-      <if test="price != null" >
-        #{price,jdbcType=REAL},
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
       </if>
-      <if test="picture != null" >
-        #{picture,jdbcType=VARCHAR},
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
       </if>
-      <if test="des != null" >
-        #{des,jdbcType=VARCHAR},
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
       </if>
-      <if test="producter != null" >
-        #{producter,jdbcType=VARCHAR},
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
       </if>
-      <if test="editdate != null" >
-        #{editdate,jdbcType=TIMESTAMP},
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.shop.model.GoodsinfoExample" resultType="java.lang.Integer" >
-    select count(*) from goodsinfo
+  <select id="countByExample" parameterType="com.shop.model.UserExample" resultType="java.lang.Integer" >
+    select count(*) from user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update goodsinfo
+    update user
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.goodsname != null" >
-        goodsName = #{record.goodsname,jdbcType=VARCHAR},
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.price != null" >
-        price = #{record.price,jdbcType=REAL},
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
       </if>
-      <if test="record.picture != null" >
-        picture = #{record.picture,jdbcType=VARCHAR},
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
       </if>
-      <if test="record.des != null" >
-        des = #{record.des,jdbcType=VARCHAR},
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
       </if>
-      <if test="record.producter != null" >
-        producter = #{record.producter,jdbcType=VARCHAR},
+      <if test="record.telephone != null" >
+        telephone = #{record.telephone,jdbcType=VARCHAR},
       </if>
-      <if test="record.editdate != null" >
-        editDate = #{record.editdate,jdbcType=TIMESTAMP},
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -194,50 +194,50 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update goodsinfo
+    update user
     set id = #{record.id,jdbcType=INTEGER},
-      goodsName = #{record.goodsname,jdbcType=VARCHAR},
-      price = #{record.price,jdbcType=REAL},
-      picture = #{record.picture,jdbcType=VARCHAR},
-      des = #{record.des,jdbcType=VARCHAR},
-      producter = #{record.producter,jdbcType=VARCHAR},
-      editDate = #{record.editdate,jdbcType=TIMESTAMP}
+      name = #{record.name,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      telephone = #{record.telephone,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shop.model.Goodsinfo" >
-    update goodsinfo
+  <update id="updateByPrimaryKeySelective" parameterType="com.shop.model.User" >
+    update user
     <set >
-      <if test="goodsname != null" >
-        goodsName = #{goodsname,jdbcType=VARCHAR},
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="price != null" >
-        price = #{price,jdbcType=REAL},
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
       </if>
-      <if test="picture != null" >
-        picture = #{picture,jdbcType=VARCHAR},
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="des != null" >
-        des = #{des,jdbcType=VARCHAR},
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
       </if>
-      <if test="producter != null" >
-        producter = #{producter,jdbcType=VARCHAR},
+      <if test="telephone != null" >
+        telephone = #{telephone,jdbcType=VARCHAR},
       </if>
-      <if test="editdate != null" >
-        editDate = #{editdate,jdbcType=TIMESTAMP},
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.shop.model.Goodsinfo" >
-    update goodsinfo
-    set goodsName = #{goodsname,jdbcType=VARCHAR},
-      price = #{price,jdbcType=REAL},
-      picture = #{picture,jdbcType=VARCHAR},
-      des = #{des,jdbcType=VARCHAR},
-      producter = #{producter,jdbcType=VARCHAR},
-      editDate = #{editdate,jdbcType=TIMESTAMP}
+  <update id="updateByPrimaryKey" parameterType="com.shop.model.User" >
+    update user
+    set name = #{name,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

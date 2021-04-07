@@ -1,23 +1,14 @@
 package com.shop.mapper;
 
-
 import com.shop.model.Goodsinfo;
 import com.shop.model.GoodsinfoExample;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
-
 
 @Mapper
 public interface GoodsinfoMapper {
-
-    @Select("select * from goodsinfo")
-    List<Map<String,Object>> selectGoodsInfoList();
-
     int countByExample(GoodsinfoExample example);
 
     int deleteByExample(GoodsinfoExample example);

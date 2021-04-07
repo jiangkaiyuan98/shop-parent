@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.shop.mapper.GoodsinfoMapper" >
-  <resultMap id="BaseResultMap" type="com.shop.model.Goodsinfo" >
+<mapper namespace="com.shop.mapper.GoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.shop.model.Goods" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="goodsName" property="goodsname" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="stock" property="stock" jdbcType="INTEGER" />
+    <result column="state" property="state" jdbcType="INTEGER" />
     <result column="price" property="price" jdbcType="REAL" />
-    <result column="picture" property="picture" jdbcType="VARCHAR" />
-    <result column="des" property="des" jdbcType="VARCHAR" />
-    <result column="producter" property="producter" jdbcType="VARCHAR" />
-    <result column="editDate" property="editdate" jdbcType="TIMESTAMP" />
+    <result column="goodsid" property="goodsid" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -69,15 +69,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, goodsName, price, picture, des, producter, editDate
+    id, name, code, stock, state, price, goodsid
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shop.model.GoodsinfoExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shop.model.GoodsExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from goodsinfo
+    from goods
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -88,105 +88,105 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from goodsinfo
+    from goods
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from goodsinfo
+    delete from goods
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.shop.model.GoodsinfoExample" >
-    delete from goodsinfo
+  <delete id="deleteByExample" parameterType="com.shop.model.GoodsExample" >
+    delete from goods
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.shop.model.Goodsinfo" >
-    insert into goodsinfo (id, goodsName, price, 
-      picture, des, producter, 
-      editDate)
-    values (#{id,jdbcType=INTEGER}, #{goodsname,jdbcType=VARCHAR}, #{price,jdbcType=REAL}, 
-      #{picture,jdbcType=VARCHAR}, #{des,jdbcType=VARCHAR}, #{producter,jdbcType=VARCHAR}, 
-      #{editdate,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="com.shop.model.Goods" >
+    insert into goods (id, name, code, 
+      stock, state, price, goodsid
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
+      #{stock,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{price,jdbcType=REAL}, #{goodsid,jdbcType=VARCHAR}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.shop.model.Goodsinfo" >
-    insert into goodsinfo
+  <insert id="insertSelective" parameterType="com.shop.model.Goods" >
+    insert into goods
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="goodsname != null" >
-        goodsName,
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="stock != null" >
+        stock,
+      </if>
+      <if test="state != null" >
+        state,
       </if>
       <if test="price != null" >
         price,
       </if>
-      <if test="picture != null" >
-        picture,
-      </if>
-      <if test="des != null" >
-        des,
-      </if>
-      <if test="producter != null" >
-        producter,
-      </if>
-      <if test="editdate != null" >
-        editDate,
+      <if test="goodsid != null" >
+        goodsid,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="goodsname != null" >
-        #{goodsname,jdbcType=VARCHAR},
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="stock != null" >
+        #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
       </if>
       <if test="price != null" >
         #{price,jdbcType=REAL},
       </if>
-      <if test="picture != null" >
-        #{picture,jdbcType=VARCHAR},
-      </if>
-      <if test="des != null" >
-        #{des,jdbcType=VARCHAR},
-      </if>
-      <if test="producter != null" >
-        #{producter,jdbcType=VARCHAR},
-      </if>
-      <if test="editdate != null" >
-        #{editdate,jdbcType=TIMESTAMP},
+      <if test="goodsid != null" >
+        #{goodsid,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.shop.model.GoodsinfoExample" resultType="java.lang.Integer" >
-    select count(*) from goodsinfo
+  <select id="countByExample" parameterType="com.shop.model.GoodsExample" resultType="java.lang.Integer" >
+    select count(*) from goods
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update goodsinfo
+    update goods
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.goodsname != null" >
-        goodsName = #{record.goodsname,jdbcType=VARCHAR},
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null" >
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stock != null" >
+        stock = #{record.stock,jdbcType=INTEGER},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=INTEGER},
       </if>
       <if test="record.price != null" >
         price = #{record.price,jdbcType=REAL},
       </if>
-      <if test="record.picture != null" >
-        picture = #{record.picture,jdbcType=VARCHAR},
-      </if>
-      <if test="record.des != null" >
-        des = #{record.des,jdbcType=VARCHAR},
-      </if>
-      <if test="record.producter != null" >
-        producter = #{record.producter,jdbcType=VARCHAR},
-      </if>
-      <if test="record.editdate != null" >
-        editDate = #{record.editdate,jdbcType=TIMESTAMP},
+      <if test="record.goodsid != null" >
+        goodsid = #{record.goodsid,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -194,50 +194,50 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update goodsinfo
+    update goods
     set id = #{record.id,jdbcType=INTEGER},
-      goodsName = #{record.goodsname,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      code = #{record.code,jdbcType=VARCHAR},
+      stock = #{record.stock,jdbcType=INTEGER},
+      state = #{record.state,jdbcType=INTEGER},
       price = #{record.price,jdbcType=REAL},
-      picture = #{record.picture,jdbcType=VARCHAR},
-      des = #{record.des,jdbcType=VARCHAR},
-      producter = #{record.producter,jdbcType=VARCHAR},
-      editDate = #{record.editdate,jdbcType=TIMESTAMP}
+      goodsid = #{record.goodsid,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shop.model.Goodsinfo" >
-    update goodsinfo
+  <update id="updateByPrimaryKeySelective" parameterType="com.shop.model.Goods" >
+    update goods
     <set >
-      <if test="goodsname != null" >
-        goodsName = #{goodsname,jdbcType=VARCHAR},
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="stock != null" >
+        stock = #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
       </if>
       <if test="price != null" >
         price = #{price,jdbcType=REAL},
       </if>
-      <if test="picture != null" >
-        picture = #{picture,jdbcType=VARCHAR},
-      </if>
-      <if test="des != null" >
-        des = #{des,jdbcType=VARCHAR},
-      </if>
-      <if test="producter != null" >
-        producter = #{producter,jdbcType=VARCHAR},
-      </if>
-      <if test="editdate != null" >
-        editDate = #{editdate,jdbcType=TIMESTAMP},
+      <if test="goodsid != null" >
+        goodsid = #{goodsid,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.shop.model.Goodsinfo" >
-    update goodsinfo
-    set goodsName = #{goodsname,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.shop.model.Goods" >
+    update goods
+    set name = #{name,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      stock = #{stock,jdbcType=INTEGER},
+      state = #{state,jdbcType=INTEGER},
       price = #{price,jdbcType=REAL},
-      picture = #{picture,jdbcType=VARCHAR},
-      des = #{des,jdbcType=VARCHAR},
-      producter = #{producter,jdbcType=VARCHAR},
-      editDate = #{editdate,jdbcType=TIMESTAMP}
+      goodsid = #{goodsid,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

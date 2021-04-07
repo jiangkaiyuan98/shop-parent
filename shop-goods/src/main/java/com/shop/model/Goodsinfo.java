@@ -1,19 +1,21 @@
 package com.shop.model;
 
+import java.util.Date;
+
 public class Goodsinfo {
     private Integer id;
 
-    private String name;
-
-    private String code;
-
-    private Integer stock;
-
-    private Integer state;
+    private String goodsname;
 
     private Float price;
 
-    private Integer goodsid;
+    private String picture;
+
+    private String des;
+
+    private String producter;
+
+    private Date editdate;
 
     public Integer getId() {
         return id;
@@ -23,36 +25,12 @@ public class Goodsinfo {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getGoodsname() {
+        return goodsname;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code == null ? null : code.trim();
-    }
-
-    public Integer getStock() {
-        return stock;
-    }
-
-    public void setStock(Integer stock) {
-        this.stock = stock;
-    }
-
-    public Integer getState() {
-        return state;
-    }
-
-    public void setState(Integer state) {
-        this.state = state;
+    public void setGoodsname(String goodsname) {
+        this.goodsname = goodsname == null ? null : goodsname.trim();
     }
 
     public Float getPrice() {
@@ -63,11 +41,35 @@ public class Goodsinfo {
         this.price = price;
     }
 
-    public Integer getGoodsid() {
-        return goodsid;
+    public String getPicture() {
+        return picture;
     }
 
-    public void setGoodsid(Integer goodsid) {
-        this.goodsid = goodsid;
+    public void setPicture(String picture) {
+        this.picture = picture == null ? null : picture.trim();
+    }
+
+    public String getDes() {
+        return des;
+    }
+
+    public void setDes(String des) {
+        this.des = des == null ? null : des.trim();
+    }
+
+    public String getProducter() {
+        return producter;
+    }
+
+    public void setProducter(String producter) {
+        this.producter = producter == null ? null : producter.trim();
+    }
+
+    public Date getEditdate() {
+        return editdate;
+    }
+
+    public void setEditdate(Date editdate) {
+        this.editdate = editdate;
     }
 }
