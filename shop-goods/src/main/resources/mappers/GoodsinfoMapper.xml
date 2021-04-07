@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.shop.mapper.GoodsinfoMapper" >
-  <resultMap id="BaseResultMap" type="cn.itcast.ssm.po.Goodsinfo" >
+  <resultMap id="BaseResultMap" type="com.shop.model.Goodsinfo" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="code" property="code" jdbcType="VARCHAR" />
@@ -71,7 +71,7 @@
   <sql id="Base_Column_List" >
     id, name, code, stock, state, price, goodsid
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.itcast.ssm.po.GoodsinfoExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shop.model.GoodsinfoExample" >
     select
     <if test="distinct" >
       distinct
@@ -95,13 +95,13 @@
     delete from goodsinfo
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="cn.itcast.ssm.po.GoodsinfoExample" >
+  <delete id="deleteByExample" parameterType="com.shop.model.GoodsinfoExample" >
     delete from goodsinfo
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.itcast.ssm.po.Goodsinfo" >
+  <insert id="insert" parameterType="com.shop.model.Goodsinfo" >
     insert into goodsinfo (id, name, code, 
       stock, state, price, goodsid
       )
@@ -109,7 +109,7 @@
       #{stock,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{price,jdbcType=REAL}, #{goodsid,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="cn.itcast.ssm.po.Goodsinfo" >
+  <insert id="insertSelective" parameterType="com.shop.model.Goodsinfo" >
     insert into goodsinfo
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -158,7 +158,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cn.itcast.ssm.po.GoodsinfoExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.shop.model.GoodsinfoExample" resultType="java.lang.Integer" >
     select count(*) from goodsinfo
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -206,7 +206,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.itcast.ssm.po.Goodsinfo" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.shop.model.Goodsinfo" >
     update goodsinfo
     <set >
       <if test="name != null" >
@@ -230,7 +230,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.itcast.ssm.po.Goodsinfo" >
+  <update id="updateByPrimaryKey" parameterType="com.shop.model.Goodsinfo" >
     update goodsinfo
     set name = #{name,jdbcType=VARCHAR},
       code = #{code,jdbcType=VARCHAR},
