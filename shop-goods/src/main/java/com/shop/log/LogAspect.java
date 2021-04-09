@@ -35,6 +35,9 @@ public class LogAspect {
         startTime.set(System.currentTimeMillis());
         ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         HttpServletRequest request = servletRequestAttributes.getRequest();
+        //打印当前服务
+        log.info("------------正在使用商品服务-----------");
+
         //打印当前的请求路径
         log.info("RequestMapping:[{}]",request.getRequestURI());
 
