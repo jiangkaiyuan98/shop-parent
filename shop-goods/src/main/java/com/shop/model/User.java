@@ -15,6 +15,8 @@ public class User {
 
     private String sex;
 
+    private String userid;
+
     public Integer getId() {
         return id;
     }
@@ -69,5 +71,13 @@ public class User {
 
     public void setSex(String sex) {
         this.sex = sex == null ? null : sex.trim();
+    }
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid == null ? null : userid.trim();
     }
 }

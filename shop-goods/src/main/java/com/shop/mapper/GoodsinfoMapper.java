@@ -4,8 +4,10 @@ import com.shop.model.Goodsinfo;
 import com.shop.model.GoodsinfoExample;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface GoodsinfoMapper {
@@ -30,4 +32,7 @@ public interface GoodsinfoMapper {
     int updateByPrimaryKeySelective(Goodsinfo record);
 
     int updateByPrimaryKey(Goodsinfo record);
+
+    @Select("select * from goods")
+    List<Map<String, Object>> selectGoodsInfoList();
 }
