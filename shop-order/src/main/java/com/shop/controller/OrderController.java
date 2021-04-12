@@ -7,6 +7,7 @@ import com.shop.model.ResponseBean;
 import com.shop.service.GoodsInfoService;
 import com.shop.service.OrderBaseService;
 import com.shop.service.OrderMainService;
+import com.shop.service.impl.OrderInitRedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import org.apache.commons.collections.MapUtils;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author ：jiangkyd
@@ -33,6 +35,9 @@ public class OrderController {
 
     @Reference
     private GoodsInfoService goodsInfoService;
+
+    @Autowired
+    private OrderInitRedisService orderInitRedisService;
 
     @RequestMapping("/testDubbo")
     public void testDubbo(){
@@ -56,23 +61,38 @@ public class OrderController {
     }
     /**
      * @author: jky
-     * @description: TODO 购物车->创建订单->预扣库存->添加到mq延迟队列等待支付->死信队列中查询订单状态->未支付还原库存
-     *                                                                                    ->已支付的确认减扣库存
+     * @description:  购物车->创建订单->预扣库存->添加到mq延迟队列等待支付->死信队列中查询订单状态->未支付还原库存
+     *                                                                                ->已支付的确认减扣库存
      * @date: 2021/4/8 下午2:09
      * @param orderinfoCuntom
      * @return com.shop.model.ResponseBean
      */
-    @RequestMapping(value="/addOrder",method = RequestMethod.PUT)
+    @RequestMapping(value="/addNewSecKillOrder",method = RequestMethod.PUT)
     public ResponseBean addOrder(@RequestBody OrderinfoCuntom orderinfoCuntom){
         ResponseBean result;
+        orderinfoCuntom.setUUIDOrderNo(UUID.randomUUID().toString().replace("-", "").toLowerCase());
+        orderinfoCuntom.setOrderstate("-1");
         try {
-            boolean flag=orderMainService.addNewOrder(orderinfoCuntom);
+            boolean flag=orderMainService.addNewSecKillOrder(orderinfoCuntom);
             if(flag)
                 result=new ResponseBean(0,"下单成功",0,null);
             else
                 result=new ResponseBean(1004,"下单失败！",0,null);
         }catch (Exception e){
             result=new ResponseBean(1004,"下单异常！",0,e);
+            log.error("ERROR", "Error found: ", e);
+        }
+        return result;
+    }
+
+    @RequestMapping("/reloadstock")
+    public ResponseBean reloadstock(){
+        ResponseBean result;
+        try {
+            orderInitRedisService.reloadstock();
+            result=new ResponseBean(1004,"库存加载成功！",0,null);
+        }catch (Exception e){
+            result=new ResponseBean(1004,"加载异常！",0,e);
             log.error("ERROR", "Error found: ", e);
         }
         return result;

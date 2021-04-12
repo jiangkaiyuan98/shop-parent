@@ -28,7 +28,7 @@ public class TestService {
         for(int i=0;i<15;i++){
             OrderinfoCuntom orderinfoCuntom=new OrderinfoCuntom(UUID.randomUUID().toString().replace("-", "").toLowerCase());
 
-            if(orderMainService.addNewOrder(orderinfoCuntom)) {
+            if(orderMainService.addNewSecKillOrder(orderinfoCuntom)) {
                 log.info(Thread.currentThread().getName() + "----秒杀成功1个商品---");
                 count++;
             }

@@ -56,4 +56,9 @@ public class OrderInitRedisService {
         }
         System.out.println("g");
     }
+
+    public void reloadstock(){
+        //重新加载
+        initOrderGoodstoRedis();
+    }
 }

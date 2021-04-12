@@ -53,4 +53,14 @@ public class OrderBaseServiceImpl implements OrderBaseService {
         List<Map<String, Object>> newOrderList = orderinfoMapper.queryAllNewOrder();
         return newOrderList;
     }
+
+    @Override
+    public String queryOrderInfoByOrderNo(String orderNo){
+        return orderinfoMapper.queryOrderInfoByOrderNo(orderNo);
+    }
+
+    @Override
+    public int updateOrderState(OrderinfoCuntom orderinfoCuntom) {
+        return orderinfoMapper.updateOrderState(orderinfoCuntom);
+    }
 }

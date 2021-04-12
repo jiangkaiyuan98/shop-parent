@@ -1,10 +1,12 @@
 package com.shop.mapper;
 
 import com.shop.model.Orderinfo;
+import com.shop.model.OrderinfoCuntom;
 import com.shop.model.OrderinfoExample;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 import java.util.Map;
@@ -35,7 +37,13 @@ public interface OrderinfoMapper {
 
     @Select("select goodsId, sum(goodsNumber) as stock\n" +
             "from shops.orderinfo a\n" +
-            "         left join ordergoods b on a.orderState = 1 and a.orderNo = b.orderId\n" +
+            "         left join ordergoods b on a.orderState in('0','-1') and a.orderNo = b.orderId\n" +
             "group by goodsId")
     List<Map<String, Object>> queryAllNewOrder();
+
+    @Select("select orderState from orderinfo where orderNo=#{orderNo} limit 1")
+    String queryOrderInfoByOrderNo(String orderNo);
+
+    @Update("update orderinfo set orderState=#{orderstate} where orderNo=#{orderno}")
+    int updateOrderState(OrderinfoCuntom orderinfoCuntom);
 }

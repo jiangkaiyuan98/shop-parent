@@ -11,5 +11,5 @@ import java.util.Map;
  * @return
  */
 public interface OrderMainService {
-    boolean addNewOrder(OrderinfoCuntom orderinfoCuntom);
+    boolean addNewSecKillOrder(OrderinfoCuntom orderinfoCuntom);
 }

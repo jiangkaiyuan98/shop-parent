@@ -1,5 +1,6 @@
 package com.shop.service;
 
+import com.shop.model.Orderinfo;
 import com.shop.model.OrderinfoCuntom;
 
 import java.util.List;
@@ -18,4 +19,8 @@ public interface OrderBaseService {
     boolean addOrder(OrderinfoCuntom orderinfoCuntom);
 
     List<Map<String, Object>> queryAllNewOrder();
+
+    String queryOrderInfoByOrderNo(String OrderNo);
+
+    int updateOrderState(OrderinfoCuntom orderinfoCuntom);
 }
