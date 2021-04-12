@@ -1,6 +1,8 @@
 package com.shop.model;
 
-public class Ordergoods {
+import java.io.Serializable;
+
+public class Ordergoods implements Serializable {
     private Integer id;
 
     private String orderid;
