@@ -3,6 +3,7 @@ package com.shop.controller;
 import com.shop.model.Ordergoods;
 import com.shop.model.OrderinfoCuntom;
 import com.shop.service.impl.TestService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +21,7 @@ import java.util.concurrent.Future;
  * @date ：2021/4/9 下午6:39
  */
 @RestController
+@Slf4j
 public class TestController {
     @Autowired
     private TestService testService;
@@ -57,18 +59,21 @@ public class TestController {
     }
     @RequestMapping("/testOrder2")
     public Integer testOrder2() throws InterruptedException, ExecutionException {
-        final CountDownLatch latch = new CountDownLatch(200);
+        final CountDownLatch latch = new CountDownLatch(10000);
 
         List<Future<Integer>> futurepool=new ArrayList<>();
-        for(int i=1;i<=1000;i++){
+        for(int i=1;i<=10000;i++){
+            log.info("########################");
+            log.info("开启第---"+i+"---个任务中");
             Future<Integer> future=testService.test2(latch);
             futurepool.add(future);
-            if(i%200==0){
-                try {
-                    latch.await();//等待CountDownLatch  为0并发执行
-                } catch (InterruptedException e) {
-                }
-            }
+            latch.countDown();
+//            if(i%200==0){
+//                try {
+//                    latch.await();//等待CountDownLatch  为0并发执行
+//                } catch (InterruptedException e) {
+//                }
+//            }
         }
 
         Integer result=0;

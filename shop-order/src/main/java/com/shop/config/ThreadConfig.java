@@ -14,7 +14,11 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
+import java.util.Queue;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.RejectedExecutionHandler;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * @Author:nyb
@@ -36,6 +40,24 @@ public class ThreadConfig {
     private int queueCapacity;
     @Value("${thread.keep.alive.seconds}")
     private int keepAliveSeconds;
+
+//    /**
+//     * 订单的缓冲队列,当线程池满了，则将订单存入到此缓冲队列
+//     */
+//    Queue<Object> msgQueue = new LinkedBlockingQueue<Object>();
+
+//    /**
+//     * 当线程池的容量满了，执行下面代码，将订单存入到缓冲队列
+//     */
+//    final RejectedExecutionHandler handler = new RejectedExecutionHandler() {
+//        @Override
+//        public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
+//            //订单加入到缓冲队列
+//            msgQueue.offer(((BusinessThread) r).getAcceptStr());
+//            System.out.println("系统任务太忙了,把此订单交给(调度线程池)逐一处理，订单号：" + ((BusinessThread) r).getAcceptStr());
+//        }
+//    };
+
 
 
     /**

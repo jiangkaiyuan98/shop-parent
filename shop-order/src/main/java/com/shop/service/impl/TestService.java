@@ -41,8 +41,10 @@ public class TestService {
     }
 
     @Async("getExecutor")
-    public Future<Integer> test2(CountDownLatch latch){
-        log.info("start"+Thread.currentThread().getName()+"-------");
+    public Future<Integer> test2(CountDownLatch latch) throws InterruptedException {
+        log.info("任务被开启等待执行");
+        latch.await();
+        log.info("任务start"+Thread.currentThread().getName()+"-------");
         Integer count=0;
         try {
             OrderinfoCuntom orderinfoCuntom=new OrderinfoCuntom(UUID.randomUUID().toString().replace("-", "").toLowerCase());
@@ -56,7 +58,7 @@ public class TestService {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            latch.countDown();//线程数-1
+//            latch.countDown();//线程数-1
         }
         return new AsyncResult<>(count);
     }
